@@ -6,6 +6,8 @@ import java.awt.event.*;
 public class Simplest extends JPanel implements KeyListener {
     boolean visible = false;                     // the whole "game state": one true/false
     Color color;
+    private int x=125;
+    private int y=125;
 
     Simplest() {
         setPreferredSize(new Dimension(300, 300));
@@ -19,10 +21,12 @@ public class Simplest extends JPanel implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_LEFT){
             visible = true;
             color = Color.BLUE;
+            x-=10;
         } 
         if (e.getKeyCode() == KeyEvent.VK_RIGHT){
             visible = true;
             color = Color.RED;
+            x+=10;
         } 
         repaint();                               // "Swing, please draw me again"
     }
@@ -33,7 +37,7 @@ public class Simplest extends JPanel implements KeyListener {
         super.paintComponent(g);
         if (visible) {
             g.setColor(color);
-            g.fillRect(125, 125, 50, 50);
+            g.fillRect(x, y, 50, 50);
         }
     }
 
