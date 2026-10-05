@@ -1,8 +1,8 @@
 import java.util.List;
 import java.util.ArrayList;
-// A bouncer that will also shoot. Extends BouncerSoldier (it IS a bouncer), so the bounce logic is inherited, not copied.
+// A bouncer that also shoots when the player is on its row. Creates bullets and hands them to the game's list.
 public class GunBouncerSoldier extends BouncerSoldier {
-    private int counter = 0; // 
+    private int counter = 0;                                  // ticks since the last shot (for a fire rate)
 
     public GunBouncerSoldier(int x, int y , int width, int height){
         super(x,y,width,height);

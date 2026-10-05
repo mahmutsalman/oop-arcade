@@ -58,8 +58,10 @@ public class Simplest extends JPanel implements KeyListener {
             // the keyboard player is a plain Soldier: its update() is empty, so the loop needs no special case
     
         }
-        for(Bullet b : bullets){
-            b.move(dm.width,dm.height);
+        // the game owns the bullets: it moves them, then removes the ones that left the map (move() only moves)
+        for(Bullet bullet : bullets){
+            bullet.move(dm.width,dm.height);
+            bullets.removeIf(b -> b.isOut(dm.width));
         }
         repaint();
     }
