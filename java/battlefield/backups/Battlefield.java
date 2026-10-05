@@ -1,3 +1,5 @@
+package backups;          // ← makes these classes backups.Battlefield and backups.Soldier: no clash with ../Soldier.java
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
