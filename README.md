@@ -7,7 +7,7 @@ The same ideas are rebuilt in several languages.
 
 | game | language | what it practises | state |
 |---|---|---|---|
-| [Battlefield](java/battlefield) | Java (Swing) | encapsulation, inheritance, polymorphism, a game loop, projectiles; next: inheritance vs composition | in progress |
+| [Battlefield](java/battlefield) | Java (Swing) · [Python (tkinter)](python/battlefield) | encapsulation, inheritance, polymorphism, a game loop, projectiles; next: inheritance vs composition | in progress |
 
 ## Layout
 ```
