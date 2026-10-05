@@ -1,6 +1,6 @@
 import java.awt.*;
-// A bullet is NOT a soldier (his call), so it is its own class. moveX / moveY are COPIED from Soldier on purpose,
-// to see what copying costs (inheritance experiment).
+// A projectile fired by a soldier. Not a Soldier subclass: it shares no behaviour with one.
+// moveX / moveY are copied from Soldier for now.
 public class Bullet {
     private boolean visible = true;
     private Color color = Color.BLACK;
