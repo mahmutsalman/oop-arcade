@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // THE SIMPLEST GAME: press UP → a square appears. Press DOWN → it disappears.     Run: java Simplest.java
-public class Simplest extends JPanel implements KeyListener, ActionListener {
+public class Simplest extends JPanel implements KeyListener {
    Soldier soldier = new Soldier();
    Soldier enemy = new Soldier(50,50,50,50);
     List<Soldier> soldiers = new ArrayList<>();   // every soldier on the map (the interface on the left, the real object on the right)
@@ -18,7 +18,7 @@ public class Simplest extends JPanel implements KeyListener, ActionListener {
         setPreferredSize(dm);
         setFocusable(true);
         addKeyListener(this);                    // "Swing, call MY keyPressed when a key is pressed"
-        timer = new Timer(100,this);
+        timer = new Timer(100,e -> tick());
         timer.start();
     }
 
@@ -42,10 +42,11 @@ public class Simplest extends JPanel implements KeyListener, ActionListener {
     }
     public void keyReleased(KeyEvent e) {}
     public void keyTyped(KeyEvent e) {}
-    public void actionPerformed(ActionEvent e){
+    public void tick(){                          // called by the lambda every 100 ms (it doesn't need the event)
         enemy.moveX(1, dm.width);
         repaint();  
     }
+    
 
     protected void paintComponent(Graphics g) {  // Swing calls this whenever it draws the panel
         super.paintComponent(g);
