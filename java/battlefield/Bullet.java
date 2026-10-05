@@ -32,5 +32,5 @@ public class Bullet {
     public int getHeight() { return height; }
     public int[] getDir() { return dir; }
     // answers a question about itself; removing it from the list is the owner's job (Simplest)
-    public boolean isOut(int maxW) { return x >= maxW; }
+    public boolean isOut(int maxW) { return x >= maxW || x <= 0 ; }
 }
