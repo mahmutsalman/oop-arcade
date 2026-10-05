@@ -8,6 +8,7 @@ public class Player {
     private int y=125;
     private int width = 50;
     private int height = 50;
+    private int amount = 10;
 
     public Player(){
 
@@ -19,6 +20,12 @@ public class Player {
         this.height= height;
     }
 
+    public void moveX(int dir,int dimensionBoundryX){
+        this.x = Math.max(0,Math.min(this.x+dir*this.amount,dimensionBoundryX-this.width));
+    }
+    public void moveY(int dir,int dimensionBoundryY){
+        this.y = Math.max(0,Math.min(this.y+dir*this.amount,dimensionBoundryY-this.height));
+    }
     public boolean isVisible() { return visible; }          // boolean getters are usually named isX()
     public void setVisible(boolean visible) { this.visible = visible; }
 

@@ -17,18 +17,18 @@ public class Simplest extends JPanel implements KeyListener {
              int x = player.getX();
              int y = player.getY();
         if (e.getKeyCode() == KeyEvent.VK_UP){
-            player.setY(Math.max(0,y-10));
+            player.moveY(-1,dm.height);
         }   
         if (e.getKeyCode() == KeyEvent.VK_DOWN){
-            player.setY(Math.min(y+10,dm.height-player.getHeight()));
+             player.moveY(1,dm.height);
         } 
         if (e.getKeyCode() == KeyEvent.VK_LEFT){
             player.setColor(Color.BLUE);
-            player.setX(Math.max(0,x-10));
+            player.moveX(-1,dm.width);
         } 
         if (e.getKeyCode() == KeyEvent.VK_RIGHT){
             player.setColor(Color.RED);
-            player.setX(Math.min(x+10,dm.width-player.getWidth()));
+            player.moveX(1,dm.width);
         } 
         repaint();                               // "Swing, please draw me again"
     }
