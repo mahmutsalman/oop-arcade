@@ -61,8 +61,8 @@ public class Simplest extends JPanel implements KeyListener {
         // the game owns the bullets: it moves them, then removes the ones that left the map (move() only moves)
         for(Bullet bullet : bullets){
             bullet.move(dm.width,dm.height);
-            bullets.removeIf(b -> b.isOut(dm.width));
         }
+        bullets.removeIf(b -> b.isOut(dm.width));
         repaint();
     }
 
