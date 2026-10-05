@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-public class Player {
+public class Soldier {
     private boolean visible = true;                     // the whole "game state": one true/false
     private Color color = Color.BLUE;
     private int x=125;
@@ -10,10 +10,10 @@ public class Player {
     private int height = 50;
     private int amount = 10;
 
-    public Player(){
+    public Soldier(){
 
     }
-    public Player(int x, int y , int width, int height){
+    public Soldier(int x, int y , int width, int height){
         this.x = x;
         this.y= y;
         this.width = width;
