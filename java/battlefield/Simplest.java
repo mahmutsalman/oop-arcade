@@ -4,12 +4,7 @@ import java.awt.event.*;
 
 // THE SIMPLEST GAME: press UP → a square appears. Press DOWN → it disappears.     Run: java Simplest.java
 public class Simplest extends JPanel implements KeyListener {
-    boolean visible = false;                     // the whole "game state": one true/false
-    Color color;
-    private int x=125;
-    private int y=125;
-    private int width = 50;
-    private int height = 50;
+   Player player = new Player();
     Dimension dm = new Dimension(300, 300);
     Simplest() {
         setPreferredSize(dm);
@@ -17,25 +12,23 @@ public class Simplest extends JPanel implements KeyListener {
         addKeyListener(this);                    // "Swing, call MY keyPressed when a key is pressed"
     }
 
-    public void keyPressed(KeyEvent e) {         // Swing calls this (we never call it ourselves)
+    public void keyPressed(KeyEvent e) {    
+             // Swing calls this (we never call it ourselves)
+             int x = player.getX();
+             int y = player.getY();
         if (e.getKeyCode() == KeyEvent.VK_UP){
-            visible = true;
-            y = Math.max(0,y-10);
+            player.setY(Math.max(0,y-10));
         }   
         if (e.getKeyCode() == KeyEvent.VK_DOWN){
-            
-            y = Math.min(y+10,dm.height-height);
+            player.setY(Math.min(y+10,dm.height-player.getHeight()));
         } 
         if (e.getKeyCode() == KeyEvent.VK_LEFT){
-            visible = true;
-            color = Color.BLUE;
-            x = Math.max(0,x-10);
+            player.setColor(Color.BLUE);
+            player.setX(Math.max(0,x-10));
         } 
         if (e.getKeyCode() == KeyEvent.VK_RIGHT){
-            visible = true;
-            color = Color.RED;
-            x = Math.min(x + 10, dm.width-width);
-            
+            player.setColor(Color.RED);
+            player.setX(Math.min(x+10,dm.width-player.getWidth()));
         } 
         repaint();                               // "Swing, please draw me again"
     }
@@ -44,9 +37,9 @@ public class Simplest extends JPanel implements KeyListener {
 
     protected void paintComponent(Graphics g) {  // Swing calls this whenever it draws the panel
         super.paintComponent(g);
-        if (visible) {
-            g.setColor(color);
-            g.fillRect(x, y, width, height);
+        if (player.isVisible()) {
+            g.setColor(player.getColor());
+            g.fillRect(player.getX(), player.getY(), player.getWidth(), player.getHeight());
         }
     }
 
