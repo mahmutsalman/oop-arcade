@@ -59,7 +59,7 @@ public class Simplest extends JPanel implements KeyListener {
     
         }
         for(Bullet b : bullets){
-            b.moveX(dm.width);
+            b.move(dm.width,dm.height);
         }
         repaint();
     }

@@ -12,7 +12,7 @@ public class GunBouncerSoldier extends BouncerSoldier {
         counter+=1;
         if(isDetected(player) ){//&& counter >= 5
             System.out.println("Bullet created");
-            bullets.add(new Bullet(this.getX(),this.getY(),1)); // direction should be towards the player.
+            bullets.add(new Bullet(this.getX(),this.getY(),new int[]{1,0})); // direction should be towards the player.
            this.counter = 0;
         }
         int rightEdge = maxW - this.getWidth();               // the largest x it can have (300 - 50 = 250)
