@@ -19,8 +19,8 @@ public class Bullet {
     
     // one step along dir; a 0 leaves that axis unchanged, so one method covers every direction (no if)
     public void move(int dimensionBoundryX,int dimensionBoundryY){ 
-        this.x = Math.max(-this.width,Math.min(this.x + dir[0]*this.amount,dimensionBoundryX));
-        this.y = Math.max(0,Math.min(this.y + dir[1]*this.amount,dimensionBoundryY));
+        this.x += dir[0]*amount;
+        this.y += dir[1]*amount;
     }
 
     public boolean isVisible() { return visible; }
@@ -32,5 +32,5 @@ public class Bullet {
     public int getHeight() { return height; }
     public int[] getDir() { return dir; }
     // answers a question about itself; removing it from the list is the owner's job (Simplest)
-    public boolean isOut(int maxW) { return x >= maxW || x <= 0 ; }
+    public boolean isOut(int maxW) { return x >= maxW+this.width || x <= -this.width ; }
 }
