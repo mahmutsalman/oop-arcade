@@ -1,3 +1,4 @@
+import java.util.List;
 // Walks toward the player, one step per tick, along the axis with the bigger gap.
 public class ChaserSoldier extends Soldier {
     public ChaserSoldier(int x, int y , int width, int height){
@@ -5,7 +6,7 @@ public class ChaserSoldier extends Soldier {
     }
     int normal = super.getAmount();                       // the normal step, kept so a shorter "arrive" step can be undone
     @Override 
-    public void update(Soldier player, int maxW, int maxH){
+    public void update(Soldier player, int maxW, int maxH, List<Bullet> bullets){
         int dx = player.getX() - this.getX();                    // + = the player is to the right
         int dy = player.getY() - this.getY();                    // + = the player is below
         

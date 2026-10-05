@@ -12,6 +12,7 @@ public class Simplest extends JPanel implements KeyListener {
    Soldier chaser = new ChaserSoldier(250,250,50,50);
    Soldier gunBouncer = new GunBouncerSoldier(50, 100, 50, 50);
     List<Soldier> soldiers = new ArrayList<>();   // every soldier on the map (the interface on the left, the real object on the right)
+    List<Bullet> bullets = new ArrayList<>();
     Dimension dm = new Dimension(300, 300);
     Timer timer;
     Simplest() {
@@ -53,8 +54,9 @@ public class Simplest extends JPanel implements KeyListener {
         // POLYMORPHISM: one call, each soldier runs ITS OWN update (Bouncer / Chaser override it, the plain Soldier does nothing).
         // No if-chain on a type any more (that was the bad-on-purpose version, commit 20238eb).
         for (Soldier s : soldiers) {
-            s.update(soldier,dm.width,dm.height);
+            s.update(soldier,dm.width,dm.height,bullets);
             // the keyboard player is a plain Soldier: its update() is empty, so the loop needs no special case
+    
         }
         repaint();
     }
@@ -66,6 +68,10 @@ public class Simplest extends JPanel implements KeyListener {
                 g.setColor(s.getColor());
                 g.fillRect(s.getX(), s.getY(), s.getWidth(), s.getHeight());
             }
+        }
+        for(Bullet b : bullets){
+            g.setColor(b.getColor());
+            g.fillRect(b.getX(), b.getY(), b.getWidth(), b.getHeight());
         }
     }
 

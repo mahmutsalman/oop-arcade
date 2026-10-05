@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
+
 public class Soldier {
     private boolean visible = true;                     // drawn or not
     private Color color = Color.BLUE;
@@ -23,7 +25,7 @@ public class Soldier {
     }
     // Called every tick by the game loop. The parent does NOTHING (= the keyboard-driven player);
     // children override it (BouncerSoldier, ChaserSoldier). Gets everything any child might need.
-    public void update(Soldier player,int maxW,int maxH){
+    public void update(Soldier player,int maxW,int maxH, List<Bullet> bullets){
 
     }
     // move one step (amount) in direction dir (-1 / +1), clamped so the whole square stays inside 0..boundary
