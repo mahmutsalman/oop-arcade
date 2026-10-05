@@ -58,6 +58,9 @@ public class Simplest extends JPanel implements KeyListener {
             // the keyboard player is a plain Soldier: its update() is empty, so the loop needs no special case
     
         }
+        for(Bullet b : bullets){
+            b.moveX(dm.width);
+        }
         repaint();
     }
 
