@@ -9,7 +9,8 @@ public class Soldier {
     private int width = 50;
     private int height = 50;
     private int amount = 10;
-    private int direction = 1;                           // remembered between ticks: +1 = right, -1 = left (his "register")
+    private int direction = 1;
+    private String type = "player";                   // ⚠️ the BAD-ON-PURPOSE version: "player" / "bouncer" / "chaser" as a String                           // remembered between ticks: +1 = right, -1 = left (his "register")
 
     public Soldier(){
 
@@ -27,6 +28,9 @@ public class Soldier {
     public void moveY(int dir,int dimensionBoundryY){
         this.y = Math.max(0,Math.min(this.y+dir*this.amount,dimensionBoundryY-this.height));
     }
+    public String getType() { return type; }
+    public void setType(String type) { this.type = type; }
+
     public int getDirection() { return direction; }
     public void setDirection(int direction) { this.direction = direction; }
 
