@@ -10,17 +10,18 @@ public class Simplest extends JPanel implements KeyListener {
    Soldier soldier = new Soldier();
    Soldier enemy = new BouncerSoldier(50,50,50,50);
    Soldier chaser = new ChaserSoldier(250,250,50,50);
+   Soldier gunBouncer = new GunBouncerSoldier(50, 100, 50, 50);
     List<Soldier> soldiers = new ArrayList<>();   // every soldier on the map (the interface on the left, the real object on the right)
     Dimension dm = new Dimension(300, 300);
     Timer timer;
     Simplest() {
         enemy.setColor(Color.red);
-        enemy.setType("bouncer");               // leftover from the String-type version: inheritance made it unnecessary
         chaser.setColor(Color.yellow);
-        chaser.setType("chaser");
+        gunBouncer.setColor(Color.CYAN);
         soldiers.add(soldier);                    // a statement: so it goes in the constructor, not the class body
         soldiers.add(enemy);
         soldiers.add(chaser);
+        soldiers.add(gunBouncer);
         setPreferredSize(dm);
         setFocusable(true);
         addKeyListener(this);                    // "Swing, call MY keyPressed when a key is pressed"
