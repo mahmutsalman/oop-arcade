@@ -8,6 +8,7 @@ public class Simplest extends JPanel implements KeyListener {
     Color color;
     private int x=125;
     private int y=125;
+    private int z=125;
 
     Simplest() {
         setPreferredSize(new Dimension(300, 300));
@@ -16,8 +17,14 @@ public class Simplest extends JPanel implements KeyListener {
     }
 
     public void keyPressed(KeyEvent e) {         // Swing calls this (we never call it ourselves)
-        if (e.getKeyCode() == KeyEvent.VK_UP)   visible = true;
-        if (e.getKeyCode() == KeyEvent.VK_DOWN) visible = false;
+        if (e.getKeyCode() == KeyEvent.VK_UP){
+            visible = true;
+            y-=10;
+        }   
+        if (e.getKeyCode() == KeyEvent.VK_DOWN){
+            
+            y+=10;
+        } 
         if (e.getKeyCode() == KeyEvent.VK_LEFT){
             visible = true;
             color = Color.BLUE;
