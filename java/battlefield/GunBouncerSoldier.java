@@ -1,34 +1,28 @@
 import java.util.List;
-import java.util.ArrayList;
 // A bouncer that also shoots when the player is on its row. Creates bullets and hands them to the game's list.
 public class GunBouncerSoldier extends BouncerSoldier {
-    private int counter = 0;                                  // ticks since the last shot (for a fire rate)
+    private static final int TICKS_BETWEEN_SHOTS = 5;        // the timer ticks every 100 ms, so 5 ticks = one shot per 0.5 s
+    private int counter = 0;                                  // ticks since the last shot
 
     public GunBouncerSoldier(int x, int y , int width, int height){
         super(x,y,width,height);
     }
     @Override 
-    public void update(Soldier player,int maxW,int maxH,List<Bullet>bullets){
-        counter+=1;
-        if(isDetected(player) ){//&& counter >= 5
-            System.out.println("Bullet created");
-            bullets.add(new Bullet(this.getX(),this.getY(),new int[]{1,0})); // direction should be towards the player.
-           this.counter = 0;
+    public void update(Soldier player,int maxW,int maxH,List<Bullet> bullets){
+        counter++;
+        if (isDetected(player) && counter >= TICKS_BETWEEN_SHOTS) {
+            int[] dir = {sideOf(player), 0};                  // horizontal only: toward the player's side
+            bullets.add(new Bullet(this.getX(), this.getY(), dir));
+            counter = 0;
         }
-        int rightEdge = maxW - this.getWidth();               // the largest x it can have (300 - 50 = 250)
-        if (this.getX() == rightEdge || this.getX() == 0) {    // on an edge? turn around
-            this.setDirection(this.getDirection() * -1);
-        }
-        this.moveX(this.getDirection(), maxW);     
-        
-       
+        super.update(player, maxW, maxH, bullets);            // the bounce itself is inherited from BouncerSoldier
     }
+    // true when the player is on (roughly) the same row
     private boolean isDetected(Soldier player){
-        if(Math.abs(player.getY()-this.getY())<=player.getHeight()){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return Math.abs(player.getY() - this.getY()) <= player.getHeight();
+    }
+    // -1 = the player is to the left, 1 = to the right, 0 = same x
+    private int sideOf(Soldier player){
+        return Integer.signum(player.getX() - this.getX());
     }
 }
