@@ -1,0 +1,8 @@
+.DS_Store
+*.class
+out/
+bin/
+__pycache__/
+node_modules/
+.vscode/
+.idea/
