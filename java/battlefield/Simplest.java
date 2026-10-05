@@ -8,10 +8,11 @@ public class Simplest extends JPanel implements KeyListener {
     Color color;
     private int x=125;
     private int y=125;
-    private int z=125;
-
+    private int width = 50;
+    private int height = 50;
+    Dimension dm = new Dimension(300, 300);
     Simplest() {
-        setPreferredSize(new Dimension(300, 300));
+        setPreferredSize(dm);
         setFocusable(true);
         addKeyListener(this);                    // "Swing, call MY keyPressed when a key is pressed"
     }
@@ -19,21 +20,22 @@ public class Simplest extends JPanel implements KeyListener {
     public void keyPressed(KeyEvent e) {         // Swing calls this (we never call it ourselves)
         if (e.getKeyCode() == KeyEvent.VK_UP){
             visible = true;
-            y-=10;
+            y = Math.max(0,y-10);
         }   
         if (e.getKeyCode() == KeyEvent.VK_DOWN){
             
-            y+=10;
+            y = Math.min(y+10,dm.height-height);
         } 
         if (e.getKeyCode() == KeyEvent.VK_LEFT){
             visible = true;
             color = Color.BLUE;
-            x-=10;
+            x = Math.max(0,x-10);
         } 
         if (e.getKeyCode() == KeyEvent.VK_RIGHT){
             visible = true;
             color = Color.RED;
-            x+=10;
+            x = Math.min(x + 10, dm.width-width);
+            
         } 
         repaint();                               // "Swing, please draw me again"
     }
@@ -44,7 +46,7 @@ public class Simplest extends JPanel implements KeyListener {
         super.paintComponent(g);
         if (visible) {
             g.setColor(color);
-            g.fillRect(x, y, 50, 50);
+            g.fillRect(x, y, width, height);
         }
     }
 
