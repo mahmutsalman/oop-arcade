@@ -2,15 +2,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 public class Soldier {
-    private boolean visible = true;                     // the whole "game state": one true/false
+    private boolean visible = true;                     // drawn or not
     private Color color = Color.BLUE;
     private int x=125;
     private int y=125;
     private int width = 50;
     private int height = 50;
-    private int amount = 10;
-    private int direction = 1;
-    private String type = "player";                   // ⚠️ the BAD-ON-PURPOSE version: "player" / "bouncer" / "chaser" as a String                           // remembered between ticks: +1 = right, -1 = left (his "register")
+    private int amount = 10;                            // step size in pixels per move (encapsulated: callers only give a direction)
+    private int direction = 1;                          // remembered between ticks: +1 = right, -1 = left (his "register"; used by the bouncer)
+    private String type = "player";                   // ⚠️ leftover from the bad-on-purpose String-type version; unused now (safe to delete)
 
     public Soldier(){
 
@@ -21,7 +21,12 @@ public class Soldier {
         this.width = width;
         this.height= height;
     }
+    // Called every tick by the game loop. The parent does NOTHING (= the keyboard-driven player);
+    // children override it (BouncerSoldier, ChaserSoldier). Gets everything any child might need.
+    public void update(Soldier player,int maxW,int maxH){
 
+    }
+    // move one step (amount) in direction dir (-1 / +1), clamped so the whole square stays inside 0..boundary
     public void moveX(int dir,int dimensionBoundryX){
         this.x = Math.max(0,Math.min(this.x+dir*this.amount,dimensionBoundryX-this.width));
     }
@@ -50,6 +55,8 @@ public class Soldier {
     
 
     public int getHeight() { return height; }
+    public void setAmount(int a) { this.amount = a; }
+    public int getAmount() { return amount; }
     
 
 }
