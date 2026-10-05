@@ -42,7 +42,10 @@ public class Simplest extends JPanel implements KeyListener, ActionListener {
     }
     public void keyReleased(KeyEvent e) {}
     public void keyTyped(KeyEvent e) {}
-    public void actionPerformed(ActionEvent e){}
+    public void actionPerformed(ActionEvent e){
+        enemy.moveX(1, dm.width);
+        repaint();  
+    }
 
     protected void paintComponent(Graphics g) {  // Swing calls this whenever it draws the panel
         super.paintComponent(g);
