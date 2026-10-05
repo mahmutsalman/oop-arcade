@@ -14,8 +14,6 @@ public class Simplest extends JPanel implements KeyListener {
 
     public void keyPressed(KeyEvent e) {    
              // Swing calls this (we never call it ourselves)
-             int x = player.getX();
-             int y = player.getY();
         if (e.getKeyCode() == KeyEvent.VK_UP){
             player.moveY(-1,dm.height);
         }   
