@@ -43,8 +43,12 @@ public class Simplest extends JPanel implements KeyListener {
     public void keyReleased(KeyEvent e) {}
     public void keyTyped(KeyEvent e) {}
     public void tick(){                          // called by the lambda every 100 ms (it doesn't need the event)
-        enemy.moveX(1, dm.width);
-        repaint();  
+        int rightEdge = dm.width - enemy.getWidth();             // the largest x the enemy can have (300 - 50 = 250)
+        if (enemy.getX() == rightEdge || enemy.getX() == 0) {    // on an edge? turn around
+            enemy.setDirection(enemy.getDirection() * -1);
+        }
+        enemy.moveX(enemy.getDirection(), dm.width);
+        repaint();
     }
     
 
