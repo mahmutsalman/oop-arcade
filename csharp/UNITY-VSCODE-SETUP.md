@@ -55,12 +55,15 @@ code --install-extension visualstudiotoolsforunity.vstuc
 Copy that file into any new Unity project's `Assets/Editor/` to reuse it.
 
 ## 6. New scripts and IntelliSense without opening Unity
-Unity's generated `Assembly-CSharp.csproj` lists every script file **by name**, and only Unity rewrites it. If you never
-open Unity, a NEW `.cs` file is missing from that list, so VS Code treats it as a loose file: the Output panel shows
-`FileBasedProgramsProjectSystem` / `Canonical.csproj`, and `MonoBehaviour`, `Debug`, `transform` are red.
-Fix used in `gauntlet`: **`bin/sync-csproj`** (a small Python script) rewrites that list from `Assets/**/*.cs` (outside
-`Editor/` folders) and adds the project to the `.slnx`. `bin/play` runs it on every play, and there is a VS Code task:
-Cmd+Shift+P → Run Task → **Sync C# project (IntelliSense)**. After it runs: Cmd+Shift+P → **Developer: Reload Window**.
+Symptom: you create `Player.cs`, and in another file `Player` is red: `CS0246 The type or namespace name 'Player'
+could not be found`. Or the Output panel shows `FileBasedProgramsProjectSystem` / `Canonical.csproj`. The code is fine:
+Unity's generated `Assembly-CSharp.csproj` lists scripts **by name**, and only Unity rewrites it, so VS Code does not know
+the new file exists.
+Fix (permanent, used in `gauntlet`): make the project use ONE wildcard, `<Compile Include="Assets/**/*.cs"
+Exclude="Assets/**/Editor/**" />`, so every new script is seen as soon as it is saved:
+- `Assets/Editor/CsprojGlob.cs` (an `AssetPostprocessor.OnGeneratedCSProject`) makes Unity write the wildcard itself;
+- `bin/sync-csproj` writes it without Unity (also run by `bin/play`, and the VS Code task **Sync C# project**).
+After the first switch: Cmd+Shift+P → **Developer: Reload Window**. Copy both files into any new Unity project.
 
 ## 7. Git
 The generated `*.csproj`, `*.sln`, `*.slnx`, `Library/`, `Temp/`, `Logs/` and `UserSettings/` are machine-specific:
