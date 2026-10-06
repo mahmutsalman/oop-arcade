@@ -1,8 +1,9 @@
 using UnityEngine;
-class Move : IMovement
+class Sprint : IMovement
 {
     Transform body;
-    public Move(Transform transform)
+    float speedMultiplier = 2;
+    public Sprint(Transform transform)
     {
      this.body = transform;   
     }
@@ -10,6 +11,6 @@ class Move : IMovement
     // moves only; doesn't care where the direction came from (keys today, chat commands later)
     public void move(float speed, Vector3 direction)
     {
-        body.position += direction.normalized * speed * Time.deltaTime;
+        body.position += direction.normalized * speed * speedMultiplier * Time.deltaTime;
     }
 }

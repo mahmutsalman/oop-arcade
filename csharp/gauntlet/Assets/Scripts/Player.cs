@@ -2,16 +2,18 @@
  class Player : MonoBehaviour{
     float speed = 5f;                                       // metres per second
     Move move;
+    Sprint sp;
      void Awake(){
         Debug.Log(" from Player class ");
         move = new Move(this.transform);  
+        sp = new Sprint(this.transform);
      }
      void Update()
     {
         Vector3 direction = ReadDirection();                // job 1: which way?                                   // job 2: go that way
-        move.move(speed,direction);
+        IMovement current = isShiftPressed() ? sp : move;
+        current.move(speed,direction);
     }
-
     // reads the keys only; never moves anything
     Vector3 ReadDirection()
     {
@@ -22,5 +24,9 @@
         if (Input.GetKey(KeyCode.D)) direction += Vector3.right;
         return direction;
     }
-    
+    bool isShiftPressed()
+    {
+       return Input.GetKey(KeyCode.LeftShift) ? true : false; 
+    }
+
  }
