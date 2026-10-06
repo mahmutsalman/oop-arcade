@@ -24,6 +24,6 @@
     // moves only; doesn't care where the direction came from (keys today, chat commands later)
     void Move(Vector3 direction)
     {
-        transform.position += direction * speed * Time.deltaTime;
+        transform.position += direction.normalized * speed * Time.deltaTime;
     }
  }
