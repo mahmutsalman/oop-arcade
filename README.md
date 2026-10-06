@@ -23,3 +23,14 @@ go/           Go games
 
 Every game folder has its own README with what it is, what it practises and how to run it.
 To see the history of one game only: `git log --oneline -- java/battlefield`.
+
+## Commit conventions
+- Subject: `<game>: what changed`, e.g. `gauntlet: the camera follows the player`.
+- Body: one trailer line naming the ideas the commit practises, so they can be searched later:
+  ```
+  Concepts: composition, isp, srp, ioc, strategy, frame-rate, greedy
+  ```
+- Find every commit about an idea: `git log --oneline -i --grep "Concepts:.*composition"`
+- Common tags: `oop` · `inheritance` · `polymorphism` · `composition` · `srp` `ocp` `lsp` `isp` `dip` (SOLID) ·
+  `ioc` · `pattern-<name>` (strategy, observer, pool...) · `algo-<name>` (greedy, bfs, heap, sliding-window...) ·
+  `perf` · `unity` · `bugfix`.
