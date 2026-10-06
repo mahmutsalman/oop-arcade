@@ -41,7 +41,7 @@ The order the game grows in. Each step is small, hand-written, and practises one
 | power-ups ordered by value | heap |
 | more ideas for all 150 problems | [Docs/algorithms-in-the-real-world.html](Docs/algorithms-in-the-real-world.html) |
 
-## 6. Multiplayer (later, his wish: play with friends)
+## 6. Multiplayer (later: play together with friends)
 - ⬜ A `NetworkBrain`: each remote player's input arrives over the network and becomes a direction (the body + brain
   design already allows it)
 - ⬜ An authoritative server: a headless Linux server build of the game on a VPS; players join from the browser
