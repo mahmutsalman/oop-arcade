@@ -7,9 +7,12 @@ A tiny top-down game: you move the blue square with the arrow keys, enemies act 
 - **Red bouncer**: walks left and right, turning at the edges.
 - **Yellow chaser**: walks toward you, closing the bigger gap first, and stops exactly on you.
 - **Cyan gun bouncer**: bounces, and fires bullets toward you when you are on its row.
-- **Blue gun chaser**: walks toward you like the chaser, and fires when you are on its row.
+- **Magenta gun chaser**: walks toward you like the chaser, and fires when you are on its row.
 - **Orange artillery**: stands still and fires once its crew has finished a job list with a cooldown between
   jobs of the same type. Check its scheduling on its own with `java -cp out ArtillerySoldier`.
+
+The **Next map** button under the battlefield switches between two maps: map 1 has every soldier, map 2 has the
+gun chaser alone.
 
 ## What it practises
 - **Encapsulation**: a `Soldier` moves itself and keeps itself inside the map (clamping); callers only give a direction.
