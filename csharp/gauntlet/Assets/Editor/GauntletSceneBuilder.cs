@@ -53,10 +53,12 @@ public static class GauntletSceneBuilder
         // visual-only prefabs (no scripts): the player, a tower soldier, an arrow, a torch fire
         var player = SavePrefab(BuildPlayerBody(), "PlayerBody");
         var soldier = SavePrefab(BuildSoldierBody(), "TowerSoldierBody");
+        var enemy = SavePrefab(BuildEnemyBody(), "EnemyBody");
         SavePrefab(BuildArrow(), "Arrow");
         var fire = SavePrefab(BuildFire(), "Fire");
 
         Spawn(player, new Vector3(0, 0, -28), 0, "Player");
+        Spawn(enemy, new Vector3(0, 0, 6), 180, "Enemy");   // a ground enemy on the path, facing the start
         foreach (var t in new[] { "ArcherTower_A", "ArcherTower_B", "ArcherTower_C" })
         {
             var tower = GameObject.Find(t).transform;
@@ -131,6 +133,19 @@ public static class GauntletSceneBuilder
         Part(PrimitiveType.Capsule, root, new Vector3(0, 0.8f, 0), new Vector3(0.7f, 0.8f, 0.7f), Mat("SoldierRed", new Color(0.75f, 0.15f, 0.12f), 0.3f));
         Part(PrimitiveType.Cylinder, root, new Vector3(0, 1.55f, 0), new Vector3(0.62f, 0.12f, 0.62f), Mat("Helmet", new Color(0.25f, 0.25f, 0.28f), 0.7f));
         Part(PrimitiveType.Cube, root, new Vector3(0, 1.3f, 0.3f), new Vector3(0.45f, 0.12f, 0.12f), Mat("Visor", Color.black, 0.9f));
+        return root;
+    }
+
+    static GameObject BuildEnemyBody()
+    {
+        var root = new GameObject("EnemyBody");
+        Part(PrimitiveType.Capsule, root, new Vector3(0, 1, 0), new Vector3(1f, 1, 1f), Mat("EnemyBody", new Color(0.45f, 0.08f, 0.10f), 0.3f));
+        Part(PrimitiveType.Cube, root, new Vector3(0, 1.55f, 0.4f), new Vector3(0.7f, 0.18f, 0.22f), Mat("EnemyVisor", new Color(0.1f, 0.02f, 0.02f), 0.9f, new Color(1f, 0.3f, 0.05f) * 1.2f));
+        var hornMat = Mat("Horn", new Color(0.9f, 0.85f, 0.75f), 0.4f);
+        var l = Part(PrimitiveType.Cube, root, new Vector3(-0.3f, 2.1f, 0), new Vector3(0.12f, 0.45f, 0.12f), hornMat);
+        l.transform.localRotation = Quaternion.Euler(0, 0, 20);
+        var r = Part(PrimitiveType.Cube, root, new Vector3(0.3f, 2.1f, 0), new Vector3(0.12f, 0.45f, 0.12f), hornMat);
+        r.transform.localRotation = Quaternion.Euler(0, 0, -20);
         return root;
     }
 

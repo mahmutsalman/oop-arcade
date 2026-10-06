@@ -3,19 +3,23 @@
     float speed = 5f;                                       // metres per second
     Move move;
     Sprint sp;
-    KeyboardBrain kb;
+    IBrain brain;
      void Awake(){
         Debug.Log(" from Player class ");
         move = new Move(this.transform);  
         sp = new Sprint(this.transform);
-        kb = new KeyboardBrain();
+        
      }
      void Update()
     {
-        Vector3 direction = kb.Decide();               // job 1: which way?                                   // job 2: go that way
+        Vector3 direction = brain.Decide();               // job 1: which way?                                   // job 2: go that way
         IMovement current = isShiftPressed() ? sp : move;
         current.move(speed,direction);
     }
+    public void Init(IBrain brain)
+   {
+      this.brain = brain;
+   }
     
     bool isShiftPressed()
     {
