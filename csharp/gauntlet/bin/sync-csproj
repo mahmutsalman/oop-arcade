@@ -1,23 +1,22 @@
 #!/usr/bin/env python3
-# Keeps VS Code's C# IntelliSense in sync without opening Unity: lists every Assets/**/*.cs (outside Editor/ folders) in
-# Assembly-CSharp.csproj and makes sure the .slnx contains it. Unity writes these files too; this only patches the list.
+# Keeps VS Code's C# IntelliSense working without opening Unity: Assembly-CSharp.csproj gets ONE wildcard
+# (Assets/**/*.cs, minus Editor folders) instead of a list of names, and the .slnx is made to contain it.
+# Unity does the same itself through Assets/Editor/CsprojGlob.cs whenever it regenerates the file.
 import glob, os, re, sys
-root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
-os.chdir(root)
+os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 proj = "Assembly-CSharp.csproj"
 if not os.path.exists(proj):
     sys.exit("sync-csproj: no Assembly-CSharp.csproj yet (run bin/play once after creating your first script)")
-files = sorted(f for f in glob.glob("Assets/**/*.cs", recursive=True) if "/Editor/" not in f + "/")
 text = open(proj, encoding="utf-8-sig").read()
-items = "".join(f'    <Compile Include="{f}" />\n' for f in files)
-text, n = re.subn(r'(<ItemGroup>\s*\n)(?:\s*<Compile Include="[^"]*" />\s*\n)+', lambda m: m.group(1) + items, text, count=1)
-if n == 0:
-    text = text.replace("</Project>", f"  <ItemGroup>\n{items}  </ItemGroup>\n</Project>")
-open(proj, "w", encoding="utf-8").write(text)
+glob_line = '<Compile Include="Assets/**/*.cs" Exclude="Assets/**/Editor/**" />'
+if glob_line not in text:
+    text = re.sub(r'[ \t]*<Compile Include="Assets/[^"]*" />\r?\n', "", text)
+    text = text.replace("</Project>", f"  <ItemGroup>\n    {glob_line}\n  </ItemGroup>\n</Project>")
+    open(proj, "w", encoding="utf-8").write(text)
 sln = next(iter(glob.glob("*.slnx")), None)
 if sln:
     s = open(sln, encoding="utf-8-sig").read()
     if proj not in s:
-        s = s.replace("<Solution>", f'<Solution>\n  <Project Path="{proj}" />', 1)
-        open(sln, "w", encoding="utf-8").write(s)
-print(f"sync-csproj: {len(files)} script(s) in {proj}")
+        open(sln, "w", encoding="utf-8").write(s.replace("<Solution>", f'<Solution>\n  <Project Path="{proj}" />', 1))
+n = len([f for f in glob.glob("Assets/**/*.cs", recursive=True) if "/Editor/" not in f])
+print(f"sync-csproj: {proj} covers Assets/**/*.cs ({n} script(s) now)")
