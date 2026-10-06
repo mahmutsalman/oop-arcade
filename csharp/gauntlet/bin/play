@@ -31,4 +31,5 @@ echo "✅ built in $(( $(date +%s) - START ))s, launching. Your Debug.Log lines 
 [ -f "$PLAYER_LOG" ] && : > "$PLAYER_LOG"
 open Builds/Gauntlet.app
 sleep 2
-tail -n +1 -F "$PLAYER_LOG" 2>/dev/null | grep --line-buffered -vE "^(Mono path|Mono config|Initialize engine|Loading player data|\[Physics|Input initialized|UnloadTime|Begin MonoManager|Unloading|Loaded scene|Shader|Metal|Renderer|Vendor|Version|VRAM|Driver|Fallback|Thread|  |$)"
+# show only what happens after Unity's start-up chatter: your Debug.Log lines, warnings, errors
+tail -n +1 -F "$PLAYER_LOG" 2>/dev/null | awk '/Finished resetting the current domain/ {on=1; next} on && !/^\(Filename:/ && NF {print; fflush()}'

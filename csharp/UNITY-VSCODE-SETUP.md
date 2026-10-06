@@ -54,6 +54,14 @@ code --install-extension visualstudiotoolsforunity.vstuc
 `CodeEditor.SetExternalScriptEditor("/Applications/Visual Studio Code.app")` and `CodeEditor.CurrentEditor.SyncAll()`.
 Copy that file into any new Unity project's `Assets/Editor/` to reuse it.
 
-## 6. Git
+## 6. New scripts and IntelliSense without opening Unity
+Unity's generated `Assembly-CSharp.csproj` lists every script file **by name**, and only Unity rewrites it. If you never
+open Unity, a NEW `.cs` file is missing from that list, so VS Code treats it as a loose file: the Output panel shows
+`FileBasedProgramsProjectSystem` / `Canonical.csproj`, and `MonoBehaviour`, `Debug`, `transform` are red.
+Fix used in `gauntlet`: **`bin/sync-csproj`** (a small Python script) rewrites that list from `Assets/**/*.cs` (outside
+`Editor/` folders) and adds the project to the `.slnx`. `bin/play` runs it on every play, and there is a VS Code task:
+Cmd+Shift+P → Run Task → **Sync C# project (IntelliSense)**. After it runs: Cmd+Shift+P → **Developer: Reload Window**.
+
+## 7. Git
 The generated `*.csproj`, `*.sln`, `*.slnx`, `Library/`, `Temp/`, `Logs/` and `UserSettings/` are machine-specific:
 keep them in `.gitignore` (see `gauntlet/.gitignore`). Commit `Assets/`, `Packages/` and `ProjectSettings/`.

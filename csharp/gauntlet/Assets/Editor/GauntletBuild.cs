@@ -36,6 +36,11 @@ public static class GauntletBuild
         PlayerSettings.defaultScreenHeight = 720;
         PlayerSettings.resizableWindow = true;
         PlayerSettings.runInBackground = true;
+        // Debug.Log prints just your message; errors and exceptions keep their stack traces (file:line)
+        PlayerSettings.SetStackTraceLogType(LogType.Log, StackTraceLogType.None);
+        PlayerSettings.SetStackTraceLogType(LogType.Warning, StackTraceLogType.None);
+        PlayerSettings.SetStackTraceLogType(LogType.Error, StackTraceLogType.ScriptOnly);
+        PlayerSettings.SetStackTraceLogType(LogType.Exception, StackTraceLogType.ScriptOnly);
 
         var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions
         {
