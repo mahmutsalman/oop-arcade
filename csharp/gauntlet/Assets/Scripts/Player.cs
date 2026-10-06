@@ -1,13 +1,15 @@
  using UnityEngine;
  class Player : MonoBehaviour{
     float speed = 5f;                                       // metres per second
+    Move move;
      void Awake(){
         Debug.Log(" from Player class ");
+        move = new Move(this.transform);  
      }
      void Update()
     {
-        Vector3 direction = ReadDirection();                // job 1: which way?
-        Move(direction);                                    // job 2: go that way
+        Vector3 direction = ReadDirection();                // job 1: which way?                                   // job 2: go that way
+        move.move(speed,direction);
     }
 
     // reads the keys only; never moves anything
@@ -20,10 +22,5 @@
         if (Input.GetKey(KeyCode.D)) direction += Vector3.right;
         return direction;
     }
-
-    // moves only; doesn't care where the direction came from (keys today, chat commands later)
-    void Move(Vector3 direction)
-    {
-        transform.position += direction.normalized * speed * Time.deltaTime;
-    }
+    
  }
