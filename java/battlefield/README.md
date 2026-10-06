@@ -6,6 +6,8 @@ A tiny top-down game: you move the blue square with the arrow keys, enemies act 
 - **Yellow chaser**: walks toward you, closing the bigger gap first, and stops exactly on you.
 - **Cyan gun bouncer**: bounces, and fires bullets toward you when you are on its row.
 - **Blue gun chaser**: walks toward you like the chaser, and fires when you are on its row.
+- **Orange artillery**: stands still and fires once its crew has finished a job list with a cooldown between
+  jobs of the same type. Check its scheduling on its own with `java -cp out ArtillerySoldier`.
 
 ## What it practises
 - **Encapsulation**: a `Soldier` moves itself and keeps itself inside the map (clamping); callers only give a direction.
@@ -14,6 +16,8 @@ A tiny top-down game: you move the blue square with the arrow keys, enemies act 
 - **A game loop**: a Swing `Timer` with a lambda calls `tick()` every 100 ms; `repaint()` asks Swing to redraw.
 - **Ownership**: a bullet is not a soldier. Soldiers decide and create bullets; the game owns the bullet list, moves,
   draws and removes them (`removeIf`). Bullets carry their own direction vector `{dx, dy}`.
+- **An algorithm inside a game object**: `ArtillerySoldier` plans its job list with a max-heap (jobs that are free now)
+  and a FIFO queue (jobs that are cooling down), the classic Task Scheduler problem.
 - **Next**: the gun chaser repeats code from two classes, which shows where inheritance stops scaling; then the same
   game with composition.
 
