@@ -22,6 +22,7 @@ Assets/Art/              models (FBX) + materials
 Assets/Editor/           GauntletSceneBuilder: rebuilds the art scene (menu: Gauntlet > Rebuild Scene)
 Art-Source/              Blender sources + the script that generates the models
 bin/play                 build + run without opening Unity
+ROADMAP.md               the plan: what comes next, step by step
 Docs/                    algorithms-in-the-real-world.html: NeetCode 150 → games, software, beyond; ideas for this game
 ```
 
