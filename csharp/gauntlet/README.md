@@ -25,3 +25,4 @@ Art-Source/              Blender sources + the script that generates the models
 
 ## Run
 Open the folder in Unity 6 (6000.4), open `Assets/Scenes/Gauntlet.unity`, press Play.
+Editor setup (VS Code): [../UNITY-VSCODE-SETUP.md](../UNITY-VSCODE-SETUP.md).
