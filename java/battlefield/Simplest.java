@@ -11,6 +11,7 @@ public class Simplest extends JPanel implements KeyListener {
    Soldier enemy = new BouncerSoldier(50,50,50,50);
    Soldier chaser = new ChaserSoldier(250,250,50,50);
    Soldier gunBouncer = new GunBouncerSoldier(50, 100, 50, 50);
+   Soldier gunChaser = new GunChaserSoldier(100,100,50,50);
     List<Soldier> soldiers = new ArrayList<>();   // every soldier on the map (the interface on the left, the real object on the right)
     List<Bullet> bullets = new ArrayList<>();
     Dimension dm = new Dimension(300, 300);
@@ -23,6 +24,7 @@ public class Simplest extends JPanel implements KeyListener {
         soldiers.add(enemy);
         soldiers.add(chaser);
         soldiers.add(gunBouncer);
+        soldiers.add(gunChaser);
         setPreferredSize(dm);
         setFocusable(true);
         addKeyListener(this);                    // "Swing, call MY keyPressed when a key is pressed"
