@@ -41,6 +41,14 @@ The order the game grows in. Each step is small, hand-written, and practises one
 | power-ups ordered by value | heap |
 | more ideas for all 150 problems | [Docs/algorithms-in-the-real-world.html](Docs/algorithms-in-the-real-world.html) |
 
-## 6. Stream game (later)
+## 6. Multiplayer (later, his wish: play with friends)
+- ⬜ A `NetworkBrain`: each remote player's input arrives over the network and becomes a direction (the body + brain
+  design already allows it)
+- ⬜ An authoritative server: a headless Linux server build of the game on a VPS; players join from the browser
+  (WebGL) over WebSockets (browsers cannot use UDP). Library: Unity Netcode for GameObjects with Unity Transport's
+  WebSocket support (or the open-source Mirror / FishNet). No Unity cloud service is required.
+- ⬜ Run it on its own small VPS (or strictly limited), never next to anything that must not slow down
+
+## 7. Stream game (later)
 - ⬜ Viewers' chat commands: spawn enemies, give the player a gun, more armor (a `ChatBrain` / commands into `Game`)
 - ⬜ Connect to the KinesinReef stream overlay
