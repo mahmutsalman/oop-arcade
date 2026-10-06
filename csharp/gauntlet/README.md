@@ -21,8 +21,18 @@ Assets/Prefabs/Visuals/  look-only prefabs: PlayerBody, TowerSoldierBody, Arrow,
 Assets/Art/              models (FBX) + materials
 Assets/Editor/           GauntletSceneBuilder: rebuilds the art scene (menu: Gauntlet > Rebuild Scene)
 Art-Source/              Blender sources + the script that generates the models
+bin/play                 build + run without opening Unity
+Docs/                    algorithms-in-the-real-world.html: NeetCode 150 → games, software, beyond; ideas for this game
 ```
 
-## Run
-Open the folder in Unity 6 (6000.4), open `Assets/Scenes/Gauntlet.unity`, press Play.
+## Run (no Unity window needed)
+```
+bin/play
+```
+or in VS Code: **Cmd+Shift+B** (the "Play Gauntlet" task). It rebuilds the scene, attaches your `Game` class (the
+composition root: a `public class Game : MonoBehaviour` in `Assets/Scripts`), builds `Builds/Gauntlet.app` with Unity in
+batch mode (~1 min the first time, faster after), launches it, and streams your `Debug.Log` lines into the terminal.
+Compile errors are printed as `file(line,col)  CSxxxx  message`. Close the Unity editor first if it has the project open.
+
+Or the classic way: open the folder in Unity 6 (6000.4), open `Assets/Scenes/Gauntlet.unity`, press Play.
 Editor setup (VS Code): [../UNITY-VSCODE-SETUP.md](../UNITY-VSCODE-SETUP.md).

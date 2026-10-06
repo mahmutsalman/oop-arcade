@@ -1,0 +1,33 @@
+#!/bin/bash
+# Build Gauntlet with Unity in the background (no editor window), launch it, and stream its log here.
+# Usage: bin/play          (Ctrl+C stops the log; close the game window to quit the game)
+set -u
+cd "$(dirname "$0")/.."
+UNITY="/Applications/Unity/Hub/Editor/$(sed -n 's/^m_EditorVersion: //p' ProjectSettings/ProjectVersion.txt)/Unity.app/Contents/MacOS/Unity"
+LOG="Logs/build.log"
+PLAYER_LOG="$HOME/Library/Logs/DefaultCompany/Gauntlet/Player.log"
+mkdir -p Logs
+
+if pgrep -f "Unity.app/Contents/MacOS/Unity.*-projectPath.*$(pwd)" >/dev/null && ! pgrep -f "Unity.*-batchmode.*$(pwd)" >/dev/null; then
+  echo "🔴 The Unity editor has this project open. Close it first (batch mode cannot share the project)."; exit 1
+fi
+pkill -f "Builds/Gauntlet.app/Contents/MacOS" 2>/dev/null
+
+echo "🔨 building (low CPU priority, ~1 min)..."
+START=$(date +%s)
+taskpolicy -b "$UNITY" -batchmode -quit -projectPath "$(pwd)" -executeMethod GauntletBuild.PlayBuild -logFile "$LOG"
+CODE=$?
+
+ERRORS=$(grep -E "error CS[0-9]+" "$LOG" | sed -E 's#^.*(Assets/[^(]+\(([0-9]+),([0-9]+)\)): error (CS[0-9]+): (.*)$#\1  \4  \5#' | sort -u)
+if [ -n "$ERRORS" ]; then
+  echo "🔴 your code does not compile:"; echo "$ERRORS"; exit 1
+fi
+if [ $CODE -ne 0 ] || [ ! -d Builds/Gauntlet.app ]; then
+  echo "🔴 build failed (exit $CODE). Last lines of $LOG:"; grep -E "GAUNTLET|Exception|error" "$LOG" | tail -15; exit 1
+fi
+grep "GAUNTLET:" "$LOG" | grep -vE "size \(" | sed 's/^/   /'
+echo "✅ built in $(( $(date +%s) - START ))s, launching. Your Debug.Log lines appear below (Ctrl+C to stop watching)."
+[ -f "$PLAYER_LOG" ] && : > "$PLAYER_LOG"
+open Builds/Gauntlet.app
+sleep 2
+tail -n +1 -F "$PLAYER_LOG" 2>/dev/null | grep --line-buffered -vE "^(Mono path|Mono config|Initialize engine|Loading player data|\[Physics|Input initialized|UnloadTime|Begin MonoManager|Unloading|Loaded scene|Shader|Metal|Renderer|Vendor|Version|VRAM|Driver|Fallback|Thread|  |$)"
