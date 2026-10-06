@@ -6,21 +6,24 @@
      }
      void Update()
     {
-        if (Input.GetKey(KeyCode.W))
-        {   
-            this.transform.position += Vector3.forward * Time.deltaTime * speed;   // (0, 0, 1): toward the gate
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            this.transform.position += Vector3.back * Time.deltaTime * speed;      // (0, 0, -1)
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            this.transform.position += Vector3.left * Time.deltaTime * speed;      // (-1, 0, 0)
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            this.transform.position += Vector3.right * Time.deltaTime * speed;     // (1, 0, 0)
-        }
+        Vector3 direction = ReadDirection();                // job 1: which way?
+        Move(direction);                                    // job 2: go that way
+    }
+
+    // reads the keys only; never moves anything
+    Vector3 ReadDirection()
+    {
+        Vector3 direction = Vector3.zero;
+        if (Input.GetKey(KeyCode.W)) direction += Vector3.forward;
+        if (Input.GetKey(KeyCode.S)) direction += Vector3.back;
+        if (Input.GetKey(KeyCode.A)) direction += Vector3.left;
+        if (Input.GetKey(KeyCode.D)) direction += Vector3.right;
+        return direction;
+    }
+
+    // moves only; doesn't care where the direction came from (keys today, chat commands later)
+    void Move(Vector3 direction)
+    {
+        transform.position += direction * speed * Time.deltaTime;
     }
  }
