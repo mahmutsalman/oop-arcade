@@ -1,4 +1,3 @@
-using System.Numerics;
 using UnityEngine;
 
 // Follows any object in the scene: it only needs the target's Transform (its position), not the whole object.
