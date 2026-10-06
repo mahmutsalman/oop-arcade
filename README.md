@@ -5,6 +5,8 @@ time. Each game stays small on purpose: one new idea per commit, so the history 
 
 The same ideas are rebuilt in several languages.
 
+![Battlefield gameplay](java/battlefield/images/battlefield.gif)
+
 | game | language | what it practises | state |
 |---|---|---|---|
 | [Battlefield](java/battlefield) | Java (Swing) · [Python (tkinter)](python/battlefield) | encapsulation, inheritance, polymorphism, a game loop, projectiles; next: inheritance vs composition | in progress |

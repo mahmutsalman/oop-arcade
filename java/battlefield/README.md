@@ -2,6 +2,8 @@
 
 A tiny top-down game: you move the blue square with the arrow keys, enemies act on their own every tick.
 
+![Battlefield gameplay](images/battlefield.gif)
+
 - **Red bouncer**: walks left and right, turning at the edges.
 - **Yellow chaser**: walks toward you, closing the bigger gap first, and stops exactly on you.
 - **Cyan gun bouncer**: bounces, and fires bullets toward you when you are on its row.
