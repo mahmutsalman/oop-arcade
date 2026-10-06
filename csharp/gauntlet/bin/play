@@ -8,7 +8,10 @@ LOG="Logs/build.log"
 PLAYER_LOG="$HOME/Library/Logs/DefaultCompany/Gauntlet/Player.log"
 mkdir -p Logs
 
-if pgrep -f "Unity.app/Contents/MacOS/Unity.*-projectPath.*$(pwd)" >/dev/null && ! pgrep -f "Unity.*-batchmode.*$(pwd)" >/dev/null; then
+if pgrep -f "Unity.*-batchmode.*-projectPath $(pwd)" >/dev/null; then
+  echo "🟡 a build of this project is already running (another bin/play). Wait for it, then try again."; exit 1
+fi
+if pgrep -f "Unity.app/Contents/MacOS/Unity.*-projectPath.*$(pwd)" >/dev/null; then
   echo "🔴 The Unity editor has this project open. Close it first (batch mode cannot share the project)."; exit 1
 fi
 pkill -f "Builds/Gauntlet.app/Contents/MacOS" 2>/dev/null
