@@ -22,14 +22,14 @@ START=$(date +%s)
 taskpolicy -b "$UNITY" -batchmode -quit -projectPath "$(pwd)" -executeMethod GauntletBuild.PlayBuild -logFile "$LOG"
 CODE=$?
 
-ERRORS=$(grep -E "error CS[0-9]+" "$LOG" | sed -E 's#^.*(Assets/[^(]+\(([0-9]+),([0-9]+)\)): error (CS[0-9]+): (.*)$#\1  \4  \5#' | sort -u)
+ERRORS=$(grep -aE "error CS[0-9]+" "$LOG" | sed -E 's#^.*(Assets/[^(]+\(([0-9]+),([0-9]+)\)): error (CS[0-9]+): (.*)$#\1  \4  \5#' | sort -u)
 if [ -n "$ERRORS" ]; then
   echo "🔴 your code does not compile:"; echo "$ERRORS"; exit 1
 fi
 if [ $CODE -ne 0 ] || [ ! -d Builds/Gauntlet.app ]; then
-  echo "🔴 build failed (exit $CODE). Last lines of $LOG:"; grep -E "GAUNTLET|Exception|error" "$LOG" | tail -15; exit 1
+  echo "🔴 build failed (exit $CODE). Last lines of $LOG:"; grep -aE "GAUNTLET|Exception|error" "$LOG" | tail -15; exit 1
 fi
-grep "GAUNTLET:" "$LOG" | grep -vE "size \(" | sed 's/^/   /'
+grep -a "GAUNTLET:" "$LOG" | grep -vE "size \(" | sed 's/^/   /'
 echo "✅ built in $(( $(date +%s) - START ))s, launching. Your Debug.Log lines appear below (Ctrl+C to stop watching)."
 [ -f "$PLAYER_LOG" ] && : > "$PLAYER_LOG"
 open Builds/Gauntlet.app
