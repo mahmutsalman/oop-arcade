@@ -32,4 +32,4 @@ echo "✅ built in $(( $(date +%s) - START ))s, launching. Your Debug.Log lines 
 open Builds/Gauntlet.app
 sleep 2
 # show only what happens after Unity's start-up chatter: your Debug.Log lines, warnings, errors
-tail -n +1 -F "$PLAYER_LOG" 2>/dev/null | awk '/Finished resetting the current domain/ {on=1; next} on && !/^\(Filename:/ && NF {print; fflush()}'
+tail -n +1 -F "$PLAYER_LOG" 2>/dev/null | awk '/Finished resetting the current domain/ {on=1; next} on && !/^\(Filename:/ && !/^\[Physics/ && !/^UnloadTime/ && NF {print; fflush()}'
