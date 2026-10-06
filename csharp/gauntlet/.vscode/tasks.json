@@ -5,8 +5,21 @@
       "label": "Play Gauntlet",
       "type": "shell",
       "command": "${workspaceFolder}/bin/play",
-      "group": { "kind": "build", "isDefault": true },
-      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Sync C# project (IntelliSense)",
+      "type": "shell",
+      "command": "${workspaceFolder}/bin/sync-csproj",
       "problemMatcher": []
     }
   ]
