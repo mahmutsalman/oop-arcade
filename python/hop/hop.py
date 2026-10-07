@@ -20,6 +20,8 @@ while(running):
     screen.fill((110,170,255))
     keys = pygame.key.get_pressed()
     
+    # BEFORE (kept on purpose to compare): each if does TWO jobs, deciding the direction AND moving,
+    # so the clamp line is written twice. The next commit splits "which way?" from "go".
     if keys[pygame.K_LEFT]:
         player.x = max(0,min(player.x - 10,800 - player.width))
     if keys[pygame.K_RIGHT]:
