@@ -11,6 +11,12 @@ The same ideas are rebuilt in several languages.
 |---|---|---|---|
 | [Battlefield](java/battlefield) | Java (Swing) · [Python (tkinter)](python/battlefield) | encapsulation, inheritance, polymorphism, a game loop, projectiles; next: inheritance vs composition | in progress |
 | [Gauntlet](csharp/gauntlet) | C# (Unity) | composition, SOLID, patterns, algorithms as real game mechanics | started |
+| [Hop](python/hop) | Python (pygame) | a Mario-style platformer: Python essentials, then classes, inheritance vs composition | started |
+
+## Remakes with a twist
+Many of these games are small remakes of well-known classics (a platformer, a tower defense, ...), drawn with plain
+shapes and no original assets, then changed with new features. A known game means the rules are clear, so the focus
+stays on the code: OOP, SOLID, patterns, and an algorithm behind every new feature.
 
 ## Layout
 ```
