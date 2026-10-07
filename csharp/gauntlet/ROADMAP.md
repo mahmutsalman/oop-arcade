@@ -23,9 +23,11 @@ The order the game grows in. Each step is small, hand-written, and practises one
 - ⬜ Pathfinding around obstacles on a grid: BFS, then A* (Walls and Gates, Network Delay Time)
 - ⬜ Tower enemies that can jump down and become ground enemies (swap the brain at runtime)
 
-## 4. Weapons
-- ⬜ `IWeapon` + arrows as objects; a bow for tower soldiers
-- ⬜ Different guns (crossbow, cannon / artillery) = different `IWeapon` classes, no new character classes
+## 4. First person + weapons (next: "I want to PLAY it")
+- ▶️ First-person camera: mouse left/right turns the body, up/down tilts a head camera; WASD relative to where you look
+- ⬜ `IWeapon` + arrows as real objects; a bow for the player, then for the tower soldiers
+- ⬜ Different medieval weapons = different `IWeapon` classes: bow, crossbow, spear (mızrak), cannon / artillery
+- ⬜ Hit and kill the tower soldiers; artillery shells you must dodge
 - ⬜ Taking cover behind walls (line of sight)
 - ⬜ An object pool for arrows (no new objects every shot)
 
@@ -49,6 +51,10 @@ The order the game grows in. Each step is small, hand-written, and practises one
   WebSocket support (or the open-source Mirror / FishNet). No Unity cloud service is required.
 - ⬜ Run it on its own small VPS (or strictly limited), never next to anything that must not slow down
 
-## 7. Stream game (later)
+## 7. Game modes (later)
+- ⬜ Solo run: reach the gate while chat commands help or hinder (spawn enemies, give a weapon, armor)
+- ⬜ Together: stream-break sessions where viewers join (multiplayer), co-op or a friendly shoot-out
+
+## 8. Stream integration (later)
 - ⬜ Viewers' chat commands: spawn enemies, give the player a gun, more armor (a `ChatBrain` / commands into `Game`)
 - ⬜ Connect to the KinesinReef stream overlay
