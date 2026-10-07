@@ -11,6 +11,7 @@ The long-term idea is a stream game: viewers' chat commands spawn enemies or hel
 | step | video |
 |---|---|
 | first-person look: the camera rides in the player's head (commit 843e9fc) | <img src="media/first-person-look.gif" width="420"> |
+| walk where you look: W follows the camera, the look is clamped (commits ae9c7fc, 21af177) | <img src="media/walk-where-you-look.gif" width="420"> |
 
 Videos are recorded with `bin/demo <name> [seconds]` (a scripted walk + look, saved as a GIF in `media/`).
 
