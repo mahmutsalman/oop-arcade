@@ -4,7 +4,7 @@
     {
       "label": "Run Hop (hop.py)",
       "type": "shell",
-      "command": "python3",
+      "command": "${command:python.interpreterPath}",
       "args": ["${workspaceFolder}/hop.py"],
       "group": { "kind": "build", "isDefault": true },
       "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
