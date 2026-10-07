@@ -21,9 +21,9 @@ while(running):
     keys = pygame.key.get_pressed()
     
     if keys[pygame.K_LEFT]:
-        player.x -= 10
+        player.x = max(0,min(player.x - 10,800 - player.width))
     if keys[pygame.K_RIGHT]:
-        player.x += 10
+        player.x = max(0,min(player.x + 10,800 - player.width))
 
     pygame.draw.rect(screen,(220,40,40),player)
     pygame.draw.rect(screen,(90,60,30),ground)
