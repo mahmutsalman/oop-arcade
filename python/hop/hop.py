@@ -20,13 +20,16 @@ while(running):
     screen.fill((110,170,255))
     keys = pygame.key.get_pressed()
     
-    # BEFORE (kept on purpose to compare): each if does TWO jobs, deciding the direction AND moving,
-    # so the clamp line is written twice. The next commit splits "which way?" from "go".
+    # AFTER: job 1 decides the direction (dx = -1, 0 or +1), job 2 moves ONCE. dx inside the maths does the
+    # choosing: dx = 0 adds nothing, so no if is needed for the move. (BEFORE: commit 5eadb6b)
+    dx = 0
     if keys[pygame.K_LEFT]:
-        player.x = max(0,min(player.x - 10,800 - player.width))
+        dx = -1
     if keys[pygame.K_RIGHT]:
-        player.x = max(0,min(player.x + 10,800 - player.width))
+        dx = 1
 
+    player.x = max(0,min(player.x + dx*10,800-player.width))
+    
     pygame.draw.rect(screen,(220,40,40),player)
     pygame.draw.rect(screen,(90,60,30),ground)
     
