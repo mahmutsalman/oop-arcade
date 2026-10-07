@@ -1,0 +1,16 @@
+#!/bin/bash
+# Records a short README video of the current build: bin/demo <name> [seconds]   → media/<name>.gif
+# Builds (like bin/play), launches the game in demo mode (a scripted walk + look, 20 fps), turns the frames into a GIF.
+set -u
+cd "$(dirname "$0")/.."
+NAME="${1:?usage: bin/demo <name> [seconds]}"; SECS="${2:-6}"
+FRAMES="$(pwd)/Logs/demo-frames"; rm -rf "$FRAMES"; mkdir -p "$FRAMES" media
+bin/play --no-run || exit 1
+echo "🎬 recording ${SECS}s..."
+Builds/Gauntlet.app/Contents/MacOS/Gauntlet -demo "$SECS" -demoDir "$FRAMES" -screen-width 960 -screen-height 540 -screen-fullscreen 0 >/dev/null 2>&1
+N=$(ls "$FRAMES" | wc -l | tr -d ' ')
+[ "$N" -gt 5 ] || { echo "🔴 only $N frames captured"; exit 1; }
+ffmpeg -loglevel error -y -framerate 20 -i "$FRAMES/f%04d.png" \
+  -vf "fps=15,scale=640:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=128[p];[b][p]paletteuse=dither=bayer" \
+  "media/$NAME.gif"
+echo "✅ media/$NAME.gif ($N frames, $(du -h "media/$NAME.gif" | cut -f1))"

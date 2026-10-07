@@ -2,6 +2,7 @@
 # Build Gauntlet with Unity in the background (no editor window), launch it, and stream its log here.
 # Usage: bin/play          (Ctrl+C stops the log; close the game window to quit the game)
 set -u
+NO_RUN=0; [ "${1:-}" = "--no-run" ] && NO_RUN=1
 cd "$(dirname "$0")/.."
 UNITY="/Applications/Unity/Hub/Editor/$(sed -n 's/^m_EditorVersion: //p' ProjectSettings/ProjectVersion.txt)/Unity.app/Contents/MacOS/Unity"
 LOG="Logs/build.log"
@@ -30,6 +31,7 @@ if [ $CODE -ne 0 ] || [ ! -d Builds/Gauntlet.app ]; then
   echo "🔴 build failed (exit $CODE). Last lines of $LOG:"; grep -aE "GAUNTLET|Exception|error" "$LOG" | tail -15; exit 1
 fi
 grep -a "GAUNTLET:" "$LOG" | grep -vE "size \(" | sed 's/^/   /'
+[ $NO_RUN = 1 ] && { echo "✅ built in $(( $(date +%s) - START ))s (not launched)"; exit 0; }
 echo "✅ built in $(( $(date +%s) - START ))s, launching. Your Debug.Log lines appear below (Ctrl+C to stop watching)."
 [ -f "$PLAYER_LOG" ] && : > "$PLAYER_LOG"
 open Builds/Gauntlet.app

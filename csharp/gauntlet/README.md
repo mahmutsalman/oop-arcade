@@ -7,6 +7,13 @@ The long-term idea is a stream game: viewers' chat commands spawn enemies or hel
 
 ![Gauntlet: the start of the path, archer towers, the gate](media/scene-start.png)
 
+## Progress
+| step | video |
+|---|---|
+| first-person look: the camera rides in the player's head (commit 843e9fc) | <img src="media/first-person-look.gif" width="420"> |
+
+Videos are recorded with `bin/demo <name> [seconds]` (a scripted walk + look, saved as a GIF in `media/`).
+
 ## What it practises
 Every gameplay class is written by hand, step by step:
 - **Composition over inheritance**: behaviours (movement, weapons) as interfaces a character HAS, swappable at runtime;
@@ -24,6 +31,7 @@ Assets/Art/              models (FBX) + materials
 Assets/Editor/           GauntletSceneBuilder: rebuilds the art scene (menu: Gauntlet > Rebuild Scene)
 Art-Source/              Blender sources + the script that generates the models
 bin/play                 build + run without opening Unity
+bin/demo                 record a short README video of the current build (media/<name>.gif)
 ROADMAP.md               the plan: what comes next, step by step
 Docs/                    algorithms-in-the-real-world.html: NeetCode 150 → games, software, beyond; ideas for this game
 ```

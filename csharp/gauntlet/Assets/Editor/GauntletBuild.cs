@@ -31,6 +31,12 @@ public static class GauntletBuild
             Debug.Log("GAUNTLET: no `Game : MonoBehaviour` class yet, the scene runs without code");
         }
 
+        // README-video recorder: inert unless the app is launched with -demo (bin/demo)
+        new GameObject("DemoRecorder").AddComponent<DemoRecorder>();
+        var active = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+        UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(active);
+        UnityEditor.SceneManagement.EditorSceneManager.SaveScene(active);
+
         PlayerSettings.fullScreenMode = FullScreenMode.Windowed;
         PlayerSettings.defaultScreenWidth = 1280;
         PlayerSettings.defaultScreenHeight = 720;
