@@ -5,6 +5,11 @@ time. Each game stays small on purpose: one new idea per commit, so the history 
 
 The same ideas are rebuilt in several languages.
 
+<p>
+  <img src="csharp/gauntlet/media/scene-start.png" width="420" alt="Gauntlet (C#, Unity)">
+  <img src="python/hop/media/step01-ground-and-player.png" width="360" alt="Hop (Python, pygame)">
+</p>
+
 ![Battlefield gameplay](java/battlefield/images/battlefield.gif)
 
 | game | language | what it practises | state |
@@ -29,6 +34,10 @@ go/           Go games
 
 Every game folder has its own README with what it is, what it practises and how to run it.
 To see the history of one game only: `git log --oneline -- java/battlefield`.
+
+## Screenshots
+Each game keeps its images in `<game>/media/`; a step that changes what you SEE adds a screenshot to that game's
+README (the Progress table), so the history is visible at a glance.
 
 ## Commit conventions
 - Subject: `<game>: what changed`, e.g. `gauntlet: the camera follows the player`.

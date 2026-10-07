@@ -3,6 +3,11 @@
 A tiny Mario-style platformer, rebuilt from scratch with plain shapes (no original assets), step by step, to learn
 Python and practise OOP, SOLID and algorithms. Each step uses one Python essential.
 
+## Progress
+| step | screenshot |
+|---|---|
+| 1: window, ground, player (hand-typed game loop) | <img src="media/step01-ground-and-player.png" width="400"> |
+
 ## Run
 ```
 python3 main.py

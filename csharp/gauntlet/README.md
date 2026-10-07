@@ -5,6 +5,8 @@ stone walls, survive the archers and the heavy cannon, and reach the gate.
 
 The long-term idea is a stream game: viewers' chat commands spawn enemies or help the player (a new weapon, more armor).
 
+![Gauntlet: the start of the path, archer towers, the gate](media/scene-start.png)
+
 ## What it practises
 Every gameplay class is written by hand, step by step:
 - **Composition over inheritance**: behaviours (movement, weapons) as interfaces a character HAS, swappable at runtime;
