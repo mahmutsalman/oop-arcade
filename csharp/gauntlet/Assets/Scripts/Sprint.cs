@@ -11,6 +11,7 @@ class Sprint : IMovement
     // moves only; doesn't care where the direction came from (keys today, chat commands later)
     public void move(float speed, Vector3 direction)
     {
-        body.position += direction.normalized * speed * speedMultiplier * Time.deltaTime;
+        Vector3 worldDirection = body.forward * direction.z + body.right * direction.x;   // same as Move (copied: see the note)
+        body.position += worldDirection.normalized * speed * speedMultiplier * Time.deltaTime;
     }
 }
