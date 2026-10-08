@@ -8,12 +8,24 @@
 public class JumpGame {
 
     static boolean canJump(int[] nums) {
-        return false;
+        // far = the farthest index I can reach so far (the one thing I carry).
+        //   i <  far  and  i == far : I can stand here → the same case
+        //   i >  far                : I can never stand here → false
+        // Two jobs at every index: 1) am I still in a valid state?  2) can I push far further?
+        int far = 0;
+        for(int i=0;i<nums.length;i++){
+            if(i>far){
+                return false;
+            }
+            far = Math.max(far, i+nums[i]);
+        }
+        return true;
     }
 
     public static void main(String[] args) {
         check(canJump(new int[]{2,3,1,1,4}), true);
         check(canJump(new int[]{3,2,1,0,4}), false);
+        check(canJump(new int[]{0}), true);        // already on the last index
     }
 
     static void check(Object got, Object expected) {
