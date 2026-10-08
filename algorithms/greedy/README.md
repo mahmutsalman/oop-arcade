@@ -10,7 +10,7 @@ test cases. Run one with `java <File>.java`.
 | 03 | [Maximum Sum Circular Subarray](MaximumSumCircularSubarray.java) | 918 | Medium | ✅ |
 | 04 | [Longest Turbulent Subarray](LongestTurbulentSubarray.java) | 978 | Medium | ✅ |
 | 05 | [Jump Game](JumpGame.java) | 55 | Medium | ✅ |
-| 06 | [Jump Game II](JumpGameII.java) | 45 | Medium | |
+| 06 | [Jump Game II](JumpGameII.java) | 45 | Medium | ✅ |
 | 07 | [Jump Game VII](JumpGameVII.java) | 1871 | Medium | |
 | 08 | [Gas Station](GasStation.java) | 134 | Medium | |
 | 09 | [Hand of Straights](HandOfStraights.java) | 846 | Medium | |
