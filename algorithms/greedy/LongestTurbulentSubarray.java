@@ -9,24 +9,17 @@
 public class LongestTurbulentSubarray {
 
     static int maxTurbulenceSize(int[] arr) {
-        if(arr.length==1){
-            return 1;
-        }
-        // Work on the STEPS, not the numbers: signum(this - previous) = -1 down, 0 equal, 1 up.
-        // length = how many NUMBERS are in the turbulent part that ends here.
-        //   equal step (8,8)            → 1   only the number itself
-        //   same direction (4,8,12)     → 2   the last two numbers are still a valid part
-        //   different direction         → +1
-        int prev = Integer.signum(arr[1]-arr[0]);
-        int length = prev==0 ? 1 : 2;
-        int maxLength = length;
-        for(int i=2;i<arr.length;i++){
+        // length = how many NUMBERS are in the turbulent part that ends here
+        int prev = 0;
+        int length = 1;      // the first number alone
+        int maxLength = 1;
+        for(int i=1;i<arr.length;i++){
             int curr = Integer.signum(arr[i]-arr[i-1]);
-            if(curr==0){
+            if(curr==0){              // rule 1: no difference → reset
                 length=1;
             }
-            else if(prev!=curr){
-                length+=1;
+            else if(prev!=curr){      // rule 2: it alternates → one more
+                length = length+1;
             }
             else{
                 length=2;
@@ -43,6 +36,7 @@ public class LongestTurbulentSubarray {
         check(maxTurbulenceSize(new int[]{100}), 1);
         check(maxTurbulenceSize(new int[]{8,8}), 1);       // equal neighbours: only one number counts
         check(maxTurbulenceSize(new int[]{9,9,9}), 1);
+        check(maxTurbulenceSize(new int[]{1,3,2,4,5,3}), 4);   // 1,3,2,4 then 5 goes up again
         check(maxTurbulenceSize(new int[]{5,5,1}), 2);     // the part is 5,1
     }
 
