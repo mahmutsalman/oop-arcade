@@ -10,6 +10,10 @@ public class LongestTurbulentSubarray {
 
     static int maxTurbulenceSize(int[] arr) {
         // length = how many NUMBERS are in the turbulent part that ends here
+        // prev and curr are the signs of two neighbouring steps (-1 down, 0 flat, 1 up): 9 combinations.
+        //   curr flat (3 combinations)                    → 1
+        //   a real step, direction changed (4)            → +1
+        //   a real step, same direction: up-up, down-down → 2
         int prev = 0;
         int length = 1;      // the first number alone
         int maxLength = 1;
@@ -21,7 +25,7 @@ public class LongestTurbulentSubarray {
             else if(prev!=curr){      // rule 2: it alternates → one more
                 length = length+1;
             }
-            else{
+            else{                     // rule 3: a real step in the SAME direction → only the last two numbers survive
                 length=2;
             }
             maxLength = Math.max(maxLength,length);
