@@ -34,31 +34,6 @@ public class LongestTurbulentSubarray {
         return maxLength;
     }
 
-    // The same question as plain recursion: "how long is the turbulent part that ENDS at index i?"
-    // It asks the SAME question about i-1. The loop above is this recursion, remembering only the last answer.
-    static int endsAt(int[] arr, int i) {
-        if(i==0){
-            return 1;
-        }
-        int curr = Integer.signum(arr[i]-arr[i-1]);
-        if(curr==0){
-            return 1;
-        }
-        int prev = i>=2 ? Integer.signum(arr[i-1]-arr[i-2]) : 0;
-        if(prev!=curr){
-            return endsAt(arr, i-1)+1;
-        }
-        return 2;
-    }
-
-    static int maxTurbulenceSizeRecursive(int[] arr) {
-        int best = 1;
-        for(int i=0;i<arr.length;i++){
-            best = Math.max(best, endsAt(arr, i));
-        }
-        return best;
-    }
-
     public static void main(String[] args) {
         check(maxTurbulenceSize(new int[]{9,4,2,10,7,8,8,1,9}), 5);
         check(maxTurbulenceSize(new int[]{4,8,12,16}), 2);
@@ -67,9 +42,6 @@ public class LongestTurbulentSubarray {
         check(maxTurbulenceSize(new int[]{9,9,9}), 1);
         check(maxTurbulenceSize(new int[]{1,3,2,4,5,3}), 4);   // 1,3,2,4 then 5 goes up again
         check(maxTurbulenceSize(new int[]{5,5,1}), 2);     // the part is 5,1
-        check(maxTurbulenceSizeRecursive(new int[]{9,4,2,10,7,8,8,1,9}), 5);
-        check(maxTurbulenceSizeRecursive(new int[]{1,3,2,4,5,3}), 4);
-        check(maxTurbulenceSizeRecursive(new int[]{9,9,9}), 1);
     }
 
     static void check(Object got, Object expected) {
