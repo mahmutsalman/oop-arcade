@@ -15,28 +15,19 @@ public class LemonadeChange {
         for(int bill : bills){
             if(bill==5){
                 fives++;
-                continue;
-            }
-            if(bill==10 && fives>0){
+            }else if(bill==10 && fives>0){
                 fives--;
                 tens++;
-                continue;
-            }
-            if(bill==20){
-                
-                //give 5 + 10
-                if(fives>0 && tens>0){
-                    fives--;
-                    tens--;
-                    continue;
-                }
+            }else if(bill==20 && fives>0 && tens>0){
+                //give 5 + 10 first: a five is worth more, it changes both a 10 and a 20
+                fives--;
+                tens--;
+            }else if(bill==20 && fives>=3){
                 //give 5+5+5
-                if(fives>=3){
-                    fives-=3;
-                    continue;
-                }
+                fives-=3;
+            }else{
+                return false;
             }
-            return false;
         }
         return true;
     }
